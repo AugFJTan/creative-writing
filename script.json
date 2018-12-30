@@ -1,0 +1,9 @@
+[
+{"name" : "normal-text", "description" : "My name is Amanda. I am 23 this year (gosh, I feel old) and I work as a salesperson at the Sony store in Megavalley Mall."},
+{"name" : "normal-text", "description" : "I realise that I should visit an old friend."},
+{"name" : "choice-1", "description" : "Who shall I visit?", "outcomes" :
+[{"label" : "Bryan", "callback" : "choice1Result(0)"},
+{"label" : "Tiffany", "callback" : "choice1Result(1)"},
+{"label" : "Ellie", "callback" : "choice1Result(2)"}]},
+{"name" : "normal-text", "description" : "I make up my mind to visit [friend]."}
+]

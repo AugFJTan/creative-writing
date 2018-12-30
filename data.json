@@ -1,0 +1,32 @@
+{
+"friends" :
+[
+{"name" : "Bryan", "description" : "a high-school acquaintance", "bio" : "", "home" : ""},
+{"name" : "Tiffany", "description" : "an old girlfriend of mine", "bio" : "", "home" : ""},
+{"name" : "Ellie", "description" : "a former colleague", "bio" : "", "home" : ""}
+],
+"locations" :
+[
+{"name" : "bookstore", "description" : "", "gifts" :
+[
+{"name" : "My Last Night with You", "description" : "", "points" : [1,2,3]},
+{"name" : "Gardening for Dummies", "description" : "", "points" : [1,2,3]},
+{"name" : "The Big Asian Cookbook", "description" : "", "points" : [1,2,3]},
+{"name" : "The Mystery of Ivan Nodwig", "description" : "", "points" : [1,2,3]}
+]},
+{"name" : "knick-knack shop", "description" : "", "gifts" :
+[
+{"name" : "snow globe", "description" : "", "points" : [1,2,3]},
+{"name" : "potted cactus", "description" : "", "points" : [1,2,3]},
+{"name" : "dog plushie", "description" : "", "points" : [1,2,3]},
+{"name" : "alarm clock", "description" : "", "points" : [1,2,3]}
+]},
+{"name" : "bakery", "description" : "", "gifts" :
+[
+{"name" : "wine", "description" : "", "points" : [1,2,3]},
+{"name" : "fresh bread", "description" : "", "points" : [1,2,3]},
+{"name" : "chocolate cake", "description" : "", "points" : [1,2,3]},
+{"name" : "mushroom pie", "description" : "", "points" : [1,2,3]}
+]}
+]
+}
