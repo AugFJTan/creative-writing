@@ -1,8 +1,8 @@
 {
 "friends" :
 [
+{"name" : "Tiffany", "description" : "an old girlfriend", "bio" : "", "home" : ""},
 {"name" : "Bryan", "description" : "a high-school acquaintance", "bio" : "", "home" : ""},
-{"name" : "Tiffany", "description" : "an old girlfriend of mine", "bio" : "", "home" : ""},
 {"name" : "Ellie", "description" : "a former colleague", "bio" : "", "home" : ""}
 ],
 "locations" :

@@ -3,10 +3,10 @@ var story = document.getElementById("story");
 var friends = [];
 var locations = [];
 var script = [];
-var choices = [false, false, false];
 
 var visit = null;
 
+var current_choice = null;
 var script_index = 0;
 var word_count = 0;
 
@@ -85,26 +85,36 @@ function createTagText(tag, text) {
 function appendParagraph(paragraph) {
 	updateWordCount(paragraph);
 	story.appendChild(paragraph);
+	paragraph.scrollIntoView();
 }
 
 function appendChoice(choice) {
 	var list = document.createElement("ol");
 	list.setAttribute("type", "A");
 	
-	appendParagraph(createParagraphWithText(choice.getDescription()));
+	var p = createParagraphWithText(choice.getDescription());
+	p.setAttribute("style", "font-weight:bold");
+	appendParagraph(p);
 	
 	for (var i = 0; i < choice.getOutcomes().length; i++) {
 		var item = document.createElement("li");
-		var outcome = createTagText("a", choice.getOutcomes()[i].getLabel());
 		
-		outcome.setAttribute("href", "#!");
-		outcome.setAttribute("onclick", choice.getOutcomes()[i].getCallback());
+		updateStoryText(choice.getOutcomes()[i]); // Update label
+		
+		var outcome = createTagText("div", choice.getOutcomes()[i].getName());
+		outcome.setAttribute("id", choice.getName() + "-" + (i+1));
+		outcome.setAttribute("class", "link");
+		
+		outcome.setAttribute("onclick", choice.getOutcomes()[i].getDescription()); // Set callback
 		
 		item.appendChild(outcome);
 		list.appendChild(item);
 	}
 	
 	story.appendChild(list);
+	list.scrollIntoView();
+	
+	current_choice = choice;
 }
 
 function run() {
@@ -123,18 +133,54 @@ function run() {
 }
 
 function updateStoryText(story_text) {
-	if (story_text.includes("[friend]")) {
+	for (var i = 0; i < friends.length; i++) {
+		if (story_text.includes("[friend-" + (i+1) + "]"))
+			story_text.replace("[friend-" + (i+1) + "]", friends[i].getName());
+		
+		if (story_text.includes("[friend-" + (i+1) + "-desc]"))
+			story_text.replace("[friend-" + (i+1) + "-desc]", friends[i].getDescription());
+	}
+	
+	if (story_text.includes("[friend]"))
 		if (visit != null)
 			story_text.replace("[friend]", visit.getName());
-	}
 }
 
-function choice1Result(result) {
-	if (!choices[0]) {
-		visit = friends[result];
-		choices[0] = true;
-		run();
+function showOutcome(index, result) {
+	var selected = null;
+	index -= 1;
+	
+	switch(result) {
+		case 'A':
+			selected = 0;
+			break;
+		case 'B':
+			selected = 1;
+			break;
+		case 'C':
+			selected = 2;
+			break;
+		case 'D':
+			selected = 3;
+			break;
+		default:
+			selected = 0;
 	}
+	
+	// Side effects
+	if (index == 0)                // Choice 1
+		visit = friends[selected]; // Select friend to visit
+	
+	for (var i = 0; i < current_choice.getOutcomes().length; i++) {
+		var link = document.getElementById("choice-" + (index+1) + "-" + (i+1));
+		link.removeAttribute("class");
+		link.removeAttribute("onclick");
+		
+		if (i == selected)
+			link.setAttribute("style", "font-weight:bold; color:blue");
+	}
+	
+	run();
 }
 
 function updateWordCount(paragraph) {
@@ -143,6 +189,7 @@ function updateWordCount(paragraph) {
 
 function displayFinalWordCount() {
 	var p = createParagraphWithText("(" + word_count + " words)");
-	p.setAttribute("align", "right");
+	p.style = "text-align: right";
 	story.appendChild(p);
+	p.scrollIntoView();
 }

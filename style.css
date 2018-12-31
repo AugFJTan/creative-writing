@@ -1,0 +1,25 @@
+html {
+	font-family: Arial;
+}
+
+p {
+	text-align: justify;
+}
+
+li {
+	line-height: 2.0;
+	
+}
+
+div.link {
+	cursor: pointer;
+}
+
+div.link:hover {
+	color: blue;
+	font-weight: bold;
+}
+
+div {
+	line-height: 1.5;
+}

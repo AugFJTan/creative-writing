@@ -8,12 +8,16 @@ class StoryElement {
 		return this._name;
 	}
 	
+	setName(name) {
+		this._name = name;
+	}
+	
 	getDescription() {
 		return this._description;
 	}
 	
-	setDescription(text) {
-		this._description = text;
+	setDescription(description) {
+		this._description = description;
 	}
 }
 
@@ -41,25 +45,33 @@ class Choice extends StoryText {
 	constructor(name, description, outcomes) {
 		super(name, description);
 		this._outcomes = outcomes;
+		this._complete = false;
 	}
 	
 	getOutcomes() {
 		return this._outcomes;
 	}
+	
+	setComplete() {
+		this._complete = true;
+	}
+	
+	isComplete() {
+		return this._complete;
+	}
 }
 
-class Outcome {
-	constructor(label, callback) {
-		this._label = label;
-		this._callback = callback;
+class Outcome extends StoryText {
+	constructor(name, description) { // Technically label and callback respectively
+		super(name, description);
 	}
 	
-	getLabel() {
-		return this._label;
+	includes(substring) {
+		return super.getName().includes(substring);
 	}
 	
-	getCallback() {
-		return this._callback;
+	replace(old_text, new_text) {
+		super.setName(super.getName().replace(old_text, new_text));
 	}
 }
 
