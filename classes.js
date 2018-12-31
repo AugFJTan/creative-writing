@@ -76,10 +76,15 @@ class Outcome extends StoryText {
 }
 
 class Friend extends StoryElement {
-	constructor(name, description, bio, home) {
+	constructor(name, description, gender, bio, home) {
 		super(name, description);
+		this._gender = gender;
 		this._bio = bio;
 		this._home = home;
+	}
+	
+	getGender() {
+		return this._gender;
 	}
 	
 	getBio() {

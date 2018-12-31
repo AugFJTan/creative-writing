@@ -4,7 +4,7 @@ var friends = [];
 var locations = [];
 var script = [];
 
-var visit = null;
+var friend_visit = null;
 
 var current_choice = null;
 var script_index = 0;
@@ -32,7 +32,7 @@ function loadData(json) {
 	var l = json.locations;
 	
 	for (var i = 0; i < f.length; i++)
-		friends.push(new Friend(f[i].name, f[i].description, f.bio, f.home));
+		friends.push(new Friend(f[i].name, f[i].description, f[i].gender, f[i].bio, f[i].home));
 	
 	for (var i = 0; i < l.length; i++) {
 		var g = l[i].gifts;
@@ -61,19 +61,8 @@ function loadScript(json) {
 	}
 }
 
-function createParagraph() {
-	return document.createElement("p");
-}
-
 function createParagraphWithText(text) {
-	var p = createParagraph();
-	var t = createText(text);
-	p.appendChild(t);
-	return p;
-}
-
-function createText(text) {
-	return document.createTextNode(text);
+	return createTagText("p", text);
 }
 
 function createTagText(tag, text) {
@@ -82,10 +71,11 @@ function createTagText(tag, text) {
 	return element;
 }
 
-function appendParagraph(paragraph) {
+function appendParagraph(paragraph, scroll) {
 	updateWordCount(paragraph);
 	story.appendChild(paragraph);
-	paragraph.scrollIntoView();
+	if (scroll)
+		paragraph.scrollIntoView();
 }
 
 function appendChoice(choice) {
@@ -94,7 +84,7 @@ function appendChoice(choice) {
 	
 	var p = createParagraphWithText(choice.getDescription());
 	p.setAttribute("style", "font-weight:bold");
-	appendParagraph(p);
+	appendParagraph(p, false);
 	
 	for (var i = 0; i < choice.getOutcomes().length; i++) {
 		var item = document.createElement("li");
@@ -112,15 +102,17 @@ function appendChoice(choice) {
 	}
 	
 	story.appendChild(list);
-	list.scrollIntoView();
 	
 	current_choice = choice;
 }
 
 function run() {
+	var scroll = true;
+	
 	while(script[script_index] instanceof Paragraph && script_index <= script.length - 1) {
 		updateStoryText(script[script_index]);
-		appendParagraph(createParagraphWithText(script[script_index].getDescription()));
+		appendParagraph(createParagraphWithText(script[script_index].getDescription()), scroll);
+		scroll = false;
 		script_index++;
 	}
 	
@@ -141,41 +133,39 @@ function updateStoryText(story_text) {
 			story_text.replace("[friend-" + (i+1) + "-desc]", friends[i].getDescription());
 	}
 	
-	if (story_text.includes("[friend]"))
-		if (visit != null)
-			story_text.replace("[friend]", visit.getName());
+	if (friend_visit != null) {
+		if (story_text.includes("[friend]"))
+			story_text.replace(new RegExp("\\[friend\\]", "g"), friend_visit.getName()); // Use global regex to replace multiple matches
+		
+		if (story_text.includes("[bio]"))
+			story_text.replace("[bio]", friend_visit.getBio());
+		
+		if (story_text.includes("[him/her]")) {
+			var pronoun = (friend_visit.getGender() === "male") ? "him" : "her";
+			story_text.replace("[him/her]", pronoun);
+		}
+	}
+	
+	for (var i = 0; i < locations.length; i++) {
+		if (story_text.includes("[location-" + (i+1) + "]"))
+			story_text.replace("[location-" + (i+1) + "]", locations[i].getName());
+	}
 }
 
 function showOutcome(index, result) {
-	var selected = null;
+	var selected = result.charCodeAt(0) - 'A'.charCodeAt(0);
 	index -= 1;
 	
-	switch(result) {
-		case 'A':
-			selected = 0;
-			break;
-		case 'B':
-			selected = 1;
-			break;
-		case 'C':
-			selected = 2;
-			break;
-		case 'D':
-			selected = 3;
-			break;
-		default:
-			selected = 0;
-	}
-	
 	// Side effects
-	if (index == 0)                // Choice 1
-		visit = friends[selected]; // Select friend to visit
+	if (index == 0)                       // Choice 1
+		friend_visit = friends[selected]; // Select friend to visit
 	
 	for (var i = 0; i < current_choice.getOutcomes().length; i++) {
 		var link = document.getElementById("choice-" + (index+1) + "-" + (i+1));
 		link.removeAttribute("class");
 		link.removeAttribute("onclick");
 		
+		// Highlight selected outcome
 		if (i == selected)
 			link.setAttribute("style", "font-weight:bold; color:blue");
 	}
@@ -191,5 +181,4 @@ function displayFinalWordCount() {
 	var p = createParagraphWithText("(" + word_count + " words)");
 	p.style = "text-align: right";
 	story.appendChild(p);
-	p.scrollIntoView();
 }
