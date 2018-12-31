@@ -135,10 +135,15 @@ function updateStoryText(story_text) {
 	
 	if (friend_visit != null) {
 		if (story_text.includes("[friend]"))
-			story_text.replace(new RegExp("\\[friend\\]", "g"), friend_visit.getName()); // Use global regex to replace multiple matches
+			story_text.replace("[friend]", friend_visit.getName());
 		
 		if (story_text.includes("[bio]"))
 			story_text.replace("[bio]", friend_visit.getBio());
+		
+		if (story_text.includes("[he/she]")) {
+			var pronoun = (friend_visit.getGender() === "male") ? "he" : "she";
+			story_text.replace("[he/she]", pronoun);
+		}
 		
 		if (story_text.includes("[him/her]")) {
 			var pronoun = (friend_visit.getGender() === "male") ? "him" : "her";
