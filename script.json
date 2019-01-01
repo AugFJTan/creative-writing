@@ -8,7 +8,7 @@
 [{"label" : "[friend-1]", "callback" : "showOutcome(1,'A')"},
 {"label" : "[friend-2]", "callback" : "showOutcome(1,'B')"},
 {"label" : "[friend-3]", "callback" : "showOutcome(1,'C')"}]},
-{"name" : "normal-text", "description" : "I make up my mind to visit [friend]. [bio] Even so, I really hope [he/she] has forgiven me after all of that. Maybe I should make it up to [him/her]."},
+{"name" : "normal-text", "description" : "I make up my mind to visit [friend]. [bio] Even so, I really hope [friend] has forgiven me after all of that. Maybe I should make it up to [him/her]."},
 {"name" : "normal-text", "description" : "I know! I’ll buy [friend] a gift!"},
 {"name" : "normal-text", "description" : "In my excitement, I suddenly realise that I don’t know what [friend] likes (some friend I am). I bite my lower lip and shove my hands in my pants pockets. This could be a problem. I survey my surroundings and spot a few places where I could get something. To my left is the [location-1], across the road is the [location-2] and around the corner to my right is the [location-3]."},
 {"name" : "normal-text", "description" : "It’s already late in the afternoon. I don’t have much time."}

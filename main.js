@@ -135,7 +135,7 @@ function updateStoryText(story_text) {
 	
 	if (friend_visit != null) {
 		if (story_text.includes("[friend]"))
-			story_text.replace("[friend]", friend_visit.getName());
+			story_text.replace(/\[friend\]/g, friend_visit.getName()); // Global regex literal
 		
 		if (story_text.includes("[bio]"))
 			story_text.replace("[bio]", friend_visit.getBio());

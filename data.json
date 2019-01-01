@@ -2,7 +2,7 @@
 "friends" :
 [
 {"name" : "Tiffany", "description" : "an old girlfriend (love her)", "gender" : "female", "bio" : "She and I haven’t talked in three (long) years. Ever since I broke her heart, she shut me out from her life. Or maybe I shut her out from mine.", "home" : ""},
-{"name" : "Bryan", "description" : "a high-school acquaintance (meh)", "gender" : "male", "bio" : "Heh. Bryan and I couldn’t care less about each other. Ever since that one time when I took advantage of him, we've become strangers to each other.", "home" : ""},
+{"name" : "Bryan", "description" : "a high-school acquaintance (meh)", "gender" : "male", "bio" : "Heh. He and I couldn’t care less about each other. Ever since that one time when I took advantage of him, we've become strangers to each other.", "home" : ""},
 {"name" : "Ellie", "description" : "a former colleague (cool person)", "gender" : "female", "bio" : "Oh, Ellie. She’s the sweetest girl I’ve ever met. I shouldn’t have ever influenced her (I’m such a bad example). I still can’t believe I’ve ruined her life.", "home" : ""}
 ],
 "locations" :
