@@ -10,7 +10,6 @@ var values = {}; // Variable for key-value pairs
 var visit = {};  // Variable for user choice objects
 
 var current_choice = null;
-var script_index = 0;
 var word_count = 0;
 
 var reaction = { "NEGATIVE" : 0, "NEUTRAL"  : 1, "POSITIVE" : 2, "SPECIAL" : 3};
@@ -72,6 +71,7 @@ function loadScript(json) {
 			script.push(new Choice(json[i].name, json[i].description, outcomes));
 		}
 	}
+	script = script.reverse(); // Make array a FIFO stack
 }
 
 function createParagraphWithText(text) {
@@ -122,17 +122,15 @@ function appendChoice(choice) {
 function run() {
 	var scroll = true;
 	
-	while(script[script_index] instanceof Paragraph && script_index <= script.length - 1) {
-		updateStoryText(script[script_index]);
-		appendParagraph(createParagraphWithText(script[script_index].getDescription()), scroll);
+	while(script.length > 0 && script[script.length-1] instanceof Paragraph) {
+		updateStoryText(script[script.length-1]);
+		appendParagraph(createParagraphWithText(script.pop().getDescription()), scroll);
 		scroll = false;
-		script_index++;
 	}
 	
-	if (script_index <= script.length - 1) {
-		updateStoryText(script[script_index]);
-		appendChoice(script[script_index]);
-		script_index++;
+	if (script.length > 0) {
+		updateStoryText(script[script.length-1]);
+		appendChoice(script.pop());
 	} else
 		displayFinalWordCount();
 }
