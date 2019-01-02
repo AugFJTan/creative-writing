@@ -62,13 +62,13 @@ function loadScript(json) {
 		if (json[i].name === "normal-text")
 			script.push(new Paragraph(json[i].name, json[i].description));
 		else {
-			var o = json[i].outcomes;
-			var outcomes = [];
+			var o = json[i].options;
+			var options = [];
 			
 			for (var j = 0; j < o.length; j++)
-				outcomes.push(new Outcome(o[j].label, o[j].callback));
+				options.push(new Option(o[j].label, o[j].callback));
 			
-			script.push(new Choice(json[i].name, json[i].description, outcomes));
+			script.push(new Choice(json[i].name, json[i].description, options));
 		}
 	}
 	script = script.reverse(); // Make array a FIFO stack

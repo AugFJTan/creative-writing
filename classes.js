@@ -61,7 +61,7 @@ class Choice extends StoryText {
 	}
 }
 
-class Outcome extends StoryText {
+class Option extends StoryText {
 	constructor(name, description) { // Technically label and callback respectively
 		super(name, description);
 	}

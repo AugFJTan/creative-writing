@@ -4,7 +4,7 @@
 {"name" : "normal-text", "description" : "With Christmas just days away, I decide to take time off from my job (good riddance). I help my parents clean the house, decorate the tree and run a few errands. Out of boredom, I take a leisurely stroll along the street and soak in the sights: the packed trams, the other pedestrians minding their own business, the general festivities happening around me."},
 {"name" : "normal-text", "description" : "I must have been daydreaming, for I find myself in the busy shopping district (why? Ask my legs). I stop beside a brightly lit display window and look around me. Great. I’m surrounded by (mindless) consumerism. I am about to head back, when I catch sight of what’s in the display window: a mock-up of a living room, complete with a Christmas tree and fireplace, with a family of mannequins dressed in winter clothes and holding out presents, as if exchanging them with one another."},
 {"name" : "normal-text", "description" : "I stare at the mock-up for a good few minutes. I realise that I should do something this holiday. Maybe… visit a friend I haven't seen in a while? I think of three people. There’s [friend-1], [friend-1-desc]. Then there’s [friend-2], [friend-2-desc]. Finally, there’s [friend-3], [friend-3-desc]."},
-{"name" : "choice-1", "description" : "Who shall I visit?", "outcomes" :
+{"name" : "choice-1", "description" : "Who shall I visit?", "options" :
 [{"label" : "[friend-1]", "callback" : "showOutcome(1,'A')"},
 {"label" : "[friend-2]", "callback" : "showOutcome(1,'B')"},
 {"label" : "[friend-3]", "callback" : "showOutcome(1,'C')"}]},
@@ -12,12 +12,12 @@
 {"name" : "normal-text", "description" : "I know! I’ll buy [friend] a gift!"},
 {"name" : "normal-text", "description" : "In my excitement, I suddenly realise that I don’t know what [friend] likes (some friend I am). I bite my lower lip and shove my hands in my pants pockets. This could be a problem. I survey my surroundings and spot a few places where I could get something. To my left is the [location-1], across the road is the [location-2] and around the corner to my right is the [location-3]."},
 {"name" : "normal-text", "description" : "It’s already late in the afternoon. I don’t have much time."},
-{"name" : "choice-2", "description" : "I think I’ll buy something from the…", "outcomes" :
+{"name" : "choice-2", "description" : "I think I’ll buy something from the…", "options" :
 [{"label" : "[location-1]", "callback" : "showOutcome(2,'A')"},
 {"label" : "[location-2]", "callback" : "showOutcome(2,'B')"},
 {"label" : "[location-3]", "callback" : "showOutcome(2,'C')"}]},
 {"name" : "normal-text", "description" : "I walk over to the [location]. The place is [location-desc] I [browse] and find a few [gift-type] for [friend]. There’s [gift-1], [gift-2], [gift-3] and [gift-4]."},
-{"name" : "choice-3", "description" : "[friend] might like…", "outcomes" :
+{"name" : "choice-3", "description" : "[friend] might like…", "options" :
 [{"label" : "[gift-1]", "callback" : "showOutcome(3,'A')"},
 {"label" : "[gift-2]", "callback" : "showOutcome(3,'B')"},
 {"label" : "[gift-3]", "callback" : "showOutcome(3,'C')"},
