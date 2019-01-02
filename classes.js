@@ -76,11 +76,13 @@ class Outcome extends StoryText {
 }
 
 class Friend extends StoryElement {
-	constructor(name, description, gender, bio, home) {
+	constructor(name, description, gender, bio, home, script, final_outcomes) {
 		super(name, description);
 		this._gender = gender;
 		this._bio = bio;
 		this._home = home;
+		this._script = script;
+		this._final_outcomes = final_outcomes;
 	}
 	
 	getGender() {
@@ -94,12 +96,30 @@ class Friend extends StoryElement {
 	getHome() {
 		return this._home;
 	}
+	
+	getScript() {
+		return this._script;
+	}
+	
+	getFinalOutcome(index) {
+		return this._final_outcomes[index].outcome;
+	}
 }
 
 class Location extends StoryElement {
-	constructor(name, description, gifts) {
+	constructor(name, description, browse, gift_type, gifts) {
 		super(name, description);
+		this._browse = browse;
+		this._gift_type = gift_type;
 		this._gifts = gifts;
+	}
+	
+	getBrowse() {
+		return this._browse;
+	}
+	
+	getGiftType() {
+		return this._gift_type;
 	}
 	
 	getGifts() {
@@ -108,12 +128,12 @@ class Location extends StoryElement {
 }
 
 class Gift extends StoryElement {
-	constructor(name, description, points) {
+	constructor(name, description, alias) {
 		super(name, description);
-		this._points = points;
+		this._alias = alias;
 	}
 	
-	getPoints() {
-		return this._points;
+	getAlias() {
+		return this._alias;
 	}
 }

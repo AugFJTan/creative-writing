@@ -2,13 +2,18 @@ var story = document.getElementById("story");
 
 var friends = [];
 var locations = [];
+var thoughts = null;
+
 var script = [];
 
-var friend_visit = null;
+var values = {}; // Variable for key-value pairs
+var visit = {};  // Variable for user choice objects
 
 var current_choice = null;
 var script_index = 0;
 var word_count = 0;
+
+var reaction = { "NEGATIVE" : 0, "NEUTRAL"  : 1, "POSITIVE" : 2, "SPECIAL" : 3};
 
 loadFile("data.json", loadData);
 loadFile("script.json", loadScript);
@@ -31,18 +36,26 @@ function loadData(json) {
 	var f = json.friends;
 	var l = json.locations;
 	
-	for (var i = 0; i < f.length; i++)
-		friends.push(new Friend(f[i].name, f[i].description, f[i].gender, f[i].bio, f[i].home));
+	for (var i = 0; i < f.length; i++) {
+		friends.push(new Friend(f[i].name, f[i].description, f[i].gender, f[i].bio, f[i].home, f[i].script, f[i].outcomes));
+		
+		values["[friend-" + (i+1) + "]"] = f[i].name;
+		values["[friend-" + (i+1) + "-desc]"] = f[i].description;
+	}
 	
 	for (var i = 0; i < l.length; i++) {
 		var g = l[i].gifts;
 		var gifts = []
 		
 		for (var j = 0; j < g.length; j++)
-			gifts.push(new Gift(g[j].name, g[j].description, g[j].points));
+			gifts.push(new Gift(g[j].name, g[j].description, g[j].alias));
 		
-		locations.push(new Location(l[i].name, l[i].description, gifts));
+		locations.push(new Location(l[i].name, l[i].description, l[i].browse, l[i].gift_type, gifts));
+		
+		values["[location-" + (i+1) + "]"] = l[i].name;
 	}
+	
+	thoughts = json.thoughts;
 }
 
 function loadScript(json) {
@@ -125,48 +138,98 @@ function run() {
 }
 
 function updateStoryText(story_text) {
-	for (var i = 0; i < friends.length; i++) {
-		if (story_text.includes("[friend-" + (i+1) + "]"))
-			story_text.replace("[friend-" + (i+1) + "]", friends[i].getName());
-		
-		if (story_text.includes("[friend-" + (i+1) + "-desc]"))
-			story_text.replace("[friend-" + (i+1) + "-desc]", friends[i].getDescription());
-	}
+	// Replace text using key-value pair
+	for (var key in values)
+		if (story_text.includes(key))
+			story_text.replace(key, values[key]);
 	
-	if (friend_visit != null) {
+	// Special regex case
+	if (visit.friend != null) {
 		if (story_text.includes("[friend]"))
-			story_text.replace(/\[friend\]/g, friend_visit.getName()); // Global regex literal
-		
-		if (story_text.includes("[bio]"))
-			story_text.replace("[bio]", friend_visit.getBio());
-		
-		if (story_text.includes("[he/she]")) {
-			var pronoun = (friend_visit.getGender() === "male") ? "he" : "she";
-			story_text.replace("[he/she]", pronoun);
-		}
-		
-		if (story_text.includes("[him/her]")) {
-			var pronoun = (friend_visit.getGender() === "male") ? "him" : "her";
-			story_text.replace("[him/her]", pronoun);
-		}
-	}
-	
-	for (var i = 0; i < locations.length; i++) {
-		if (story_text.includes("[location-" + (i+1) + "]"))
-			story_text.replace("[location-" + (i+1) + "]", locations[i].getName());
+			story_text.replace(/\[friend\]/g, visit.friend.getName()); // Global regex literal
 	}
 }
 
-function showOutcome(index, result) {
+function showOutcome(outcome, result) {
 	var selected = result.charCodeAt(0) - 'A'.charCodeAt(0);
-	index -= 1;
 	
 	// Side effects
-	if (index == 0)                       // Choice 1
-		friend_visit = friends[selected]; // Select friend to visit
+	switch (outcome) {
+		case 1:
+			visit.friend = friends[selected]; // Select friend to visit
+			values["[him/her]"] = (visit.friend.getGender() === "male") ? "him" : "her";
+			values["[bio]"] = visit.friend.getBio();
+			values["[home]"] = visit.friend.getHome();
+			break;
+		case 2:
+			visit.location = locations[selected];
+			values["[location]"] = visit.location.getName();
+			values["[location-desc]"] = visit.location.getDescription();
+			values["[browse]"] = visit.location.getBrowse();
+			values["[gift-type]"] = visit.location.getGiftType();
+			for (var i = 0; i < visit.location.getGifts().length; i++)
+				values["[gift-" + (i+1) + "]"] = visit.location.getGifts()[i].getName();
+			break;
+		case 3:
+			visit.gift = visit.location.getGifts()[selected];
+			values["[gift-desc]"] = visit.gift.getDescription();
+			values["[gift-alias]"] = visit.gift.getAlias();
+			for (var i = 0; i < visit.friend.getScript().length; i++) {
+				var friend_script = visit.friend.getScript()[i];
+				values["[" + friend_script.name + "]"] = friend_script.description;
+			}
+			visit.reaction = null;
+			if (visit.friend.getName() === "Tiffany") { // Tiffany likes cooking and knick-knacks
+				if (visit.location.getGiftType() === "knick-knacks")
+					visit.reaction = reaction.POSITIVE;
+				else if (visit.gift.getAlias() === "cookbook")
+					visit.reaction = reaction.SPECIAL;
+				else if (visit.location.getGiftType() === "food and drinks")
+					visit.reaction = reaction.NEUTRAL;
+				else
+					visit.reaction = reaction.NEGATIVE;
+			} else if (visit.friend.getName() === "Bryan") { // Bryan likes to read
+				if (visit.location.getGiftType() === "books")
+					visit.reaction = reaction.POSITIVE;
+				else if (visit.gift.getAlias() === "alarm clock")
+					visit.reaction = reaction.SPECIAL;
+				else if (visit.location.getGiftType() === "food and drinks")
+					visit.reaction = reaction.NEUTRAL;
+				else
+					visit.reaction = reaction.NEGATIVE;
+			} else { // Ellie likes food
+				if (visit.location.getGiftType() === "food and drinks")
+					visit.reaction = reaction.POSITIVE;
+				else if (visit.gift.getAlias() === "cookbook")
+					visit.reaction = reaction.SPECIAL;
+				else if (visit.location.getGiftType() === "books")
+					visit.reaction = reaction.NEUTRAL;
+				else
+					visit.reaction = reaction.NEGATIVE;
+			}
+			var final_outcomes = visit.friend.getFinalOutcome(visit.reaction);
+			for (var i = 0; i < final_outcomes.length; i++) {
+				var outcome_text = new Paragraph(final_outcomes[i].name, final_outcomes[i].description);
+				updateStoryText(outcome_text);
+				values["[" + outcome_text.getName() + "]"] = outcome_text.getDescription();
+			}
+			var thought_text = null;
+			if (visit.reaction == reaction.NEGATIVE)
+				thought_text = thoughts[0];
+			else if (visit.reaction == reaction.NEUTRAL)
+				thought_text = thoughts[1];
+			else
+				thought_text = thoughts[2];
+			var final_thoughts = new Paragraph("", thought_text);
+			updateStoryText(final_thoughts);
+			values["[thoughts]"] = final_thoughts.getDescription();
+			break;
+		default:
+			// Do nothing
+	}
 	
 	for (var i = 0; i < current_choice.getOutcomes().length; i++) {
-		var link = document.getElementById("choice-" + (index+1) + "-" + (i+1));
+		var link = document.getElementById("choice-" + outcome + "-" + (i+1));
 		link.removeAttribute("class");
 		link.removeAttribute("onclick");
 		
