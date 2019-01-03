@@ -42,14 +42,14 @@ class Paragraph extends StoryText {
 }
 
 class Choice extends StoryText {
-	constructor(name, description, outcomes) {
+	constructor(name, description, options) {
 		super(name, description);
-		this._outcomes = outcomes;
+		this._options = options;
 		this._complete = false;
 	}
 	
-	getOutcomes() {
-		return this._outcomes;
+	getOptions() {
+		return this._options;
 	}
 	
 	setComplete() {
@@ -76,13 +76,12 @@ class Option extends StoryText {
 }
 
 class Friend extends StoryElement {
-	constructor(name, description, gender, bio, home, script, final_outcomes) {
+	constructor(name, description, gender, bio, home, script) {
 		super(name, description);
 		this._gender = gender;
 		this._bio = bio;
 		this._home = home;
 		this._script = script;
-		this._final_outcomes = final_outcomes;
 	}
 	
 	getGender() {
@@ -99,10 +98,6 @@ class Friend extends StoryElement {
 	
 	getScript() {
 		return this._script;
-	}
-	
-	getFinalOutcome(index) {
-		return this._final_outcomes[index].outcome;
 	}
 }
 

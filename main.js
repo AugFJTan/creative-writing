@@ -36,7 +36,7 @@ function loadData(json) {
 	var l = json.locations;
 	
 	for (var i = 0; i < f.length; i++) {
-		friends.push(new Friend(f[i].name, f[i].description, f[i].gender, f[i].bio, f[i].home, f[i].script, f[i].outcomes));
+		friends.push(new Friend(f[i].name, f[i].description, f[i].gender, f[i].bio, f[i].home, f[i].script));
 		
 		values["[friend-" + (i+1) + "]"] = f[i].name;
 		values["[friend-" + (i+1) + "-desc]"] = f[i].description;
@@ -99,18 +99,18 @@ function appendChoice(choice) {
 	p.setAttribute("style", "font-weight:bold");
 	appendParagraph(p, false);
 	
-	for (var i = 0; i < choice.getOutcomes().length; i++) {
+	for (var i = 0; i < choice.getOptions().length; i++) {
 		var item = document.createElement("li");
 		
-		updateStoryText(choice.getOutcomes()[i]); // Update label
+		updateStoryText(choice.getOptions()[i]); // Update label
 		
-		var outcome = createTagText("div", choice.getOutcomes()[i].getName());
-		outcome.setAttribute("id", choice.getName() + "-" + (i+1));
-		outcome.setAttribute("class", "link");
+		var option = createTagText("div", choice.getOptions()[i].getName());
+		option.setAttribute("id", choice.getName() + "-" + (i+1));
+		option.setAttribute("class", "link");
 		
-		outcome.setAttribute("onclick", choice.getOutcomes()[i].getDescription()); // Set callback
+		option.setAttribute("onclick", choice.getOptions()[i].getDescription()); // Set callback
 		
-		item.appendChild(outcome);
+		item.appendChild(option);
 		list.appendChild(item);
 	}
 	
@@ -148,11 +148,11 @@ function updateStoryText(story_text) {
 	}
 }
 
-function showOutcome(outcome, result) {
+function showOutcome(choice, result) {
 	var selected = result.charCodeAt(0) - 'A'.charCodeAt(0);
 	
 	// Side effects
-	switch (outcome) {
+	switch (choice) {
 		case 1:
 			visit.friend = friends[selected]; // Select friend to visit
 			values["[him/her]"] = (visit.friend.getGender() === "male") ? "him" : "her";
@@ -172,7 +172,7 @@ function showOutcome(outcome, result) {
 			visit.gift = visit.location.getGifts()[selected];
 			values["[gift-desc]"] = visit.gift.getDescription();
 			values["[gift-alias]"] = visit.gift.getAlias();
-			for (var i = 0; i < visit.friend.getScript().length; i++) {
+			for (var i = 0; i < visit.friend.getScript().length-2; i++) {
 				var friend_script = visit.friend.getScript()[i];
 				values["[" + friend_script.name + "]"] = friend_script.description;
 			}
@@ -205,9 +205,9 @@ function showOutcome(outcome, result) {
 				else
 					visit.reaction = reaction.NEGATIVE;
 			}
-			var final_outcomes = visit.friend.getFinalOutcome(visit.reaction);
-			for (var i = 0; i < final_outcomes.length; i++) {
-				var outcome_text = new Paragraph(final_outcomes[i].name, final_outcomes[i].description);
+			for (var i = visit.friend.getScript().length-2; i < visit.friend.getScript().length; i++) {
+				var final_outcomes = visit.friend.getScript()[i];
+				var outcome_text = new Paragraph(final_outcomes.name, final_outcomes.outcomes[visit.reaction]);
 				updateStoryText(outcome_text);
 				values["[" + outcome_text.getName() + "]"] = outcome_text.getDescription();
 			}
@@ -226,12 +226,12 @@ function showOutcome(outcome, result) {
 			// Do nothing
 	}
 	
-	for (var i = 0; i < current_choice.getOutcomes().length; i++) {
-		var link = document.getElementById("choice-" + outcome + "-" + (i+1));
+	for (var i = 0; i < current_choice.getOptions().length; i++) {
+		var link = document.getElementById("choice-" + choice + "-" + (i+1));
 		link.removeAttribute("class");
 		link.removeAttribute("onclick");
 		
-		// Highlight selected outcome
+		// Highlight selected option
 		if (i == selected)
 			link.setAttribute("style", "font-weight:bold; color:blue");
 	}

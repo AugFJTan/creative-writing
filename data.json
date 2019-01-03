@@ -8,13 +8,17 @@
 {"name" : "reply", "description" : "“Um,” I mumble, “Jacob’s a nice guy. Just because I started dating him doesn’t mean we can’t still be friends.”"},
 {"name" : "reaction-1", "description" : "Tiffany presses her lips together. “I thought you were different from the rest of ‘em.”"},
 {"name" : "reaction-2", "description" : "She snatches it from me. She is about to close the door, but I stop her in time. She glares at me again."},
-{"name" : "reaction-3", "description" : "withdraws my gift."}
-],
-"outcomes" : [
-{"outcome" : [{"name" : "outcome-1", "description" : "“You got me a [gift-alias]?” Tiffany frowned. “Thanks, but no thanks. You keep it.”"}, {"name" : "outcome-2", "description" : "With that, Tiffany slams the door in my face."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Just plain old [gift-alias], I see.” Tiffany gives me a faint smile. “Thanks… I guess.”"}, {"name" : "outcome-2", "description" : "Tiffany and I chat for a bit, but we quickly run out of things to say (of course). We awkwardly bid each other farewell and go our separate ways."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“This is adorable!” Tiffany giggles and admires the [gift-alias] from different angles. “Thank you so much for the gift!”"}, {"name" : "outcome-2", "description" : "Tiffany invites me into her unit and we chat for a while. She seems to be her usual self. Never once did the topic of my sexuality pop up (thank goodness for that). Before I leave, Tiffany tells me that I am welcome back anytime."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Huh. I’ve been meaning to learn how to cook.” Tiffany giggles and flips through the cookbook’s pages. “I guess I gotta start somewhere.”"}, {"name" : "outcome-2", "description" : "Tiffany invites me into her unit and we chat for a while. She seems to be her usual self. Never once did the topic of my sexuality pop up (thank goodness for that). Before I leave, Tiffany tells me that I am welcome back anytime."}]}
+{"name" : "reaction-3", "description" : "withdraws my gift."},
+{"name" : "outcome-1", "outcomes" :
+["“You got me a [gift-alias]?” Tiffany frowned. “Thanks, but no thanks. You keep it.”",
+"“Just plain old [gift-alias], I see.” Tiffany gives me a faint smile. “Thanks… I guess.”",
+"“This is adorable!” Tiffany giggles and admires the [gift-alias] from different angles. “Thank you so much for the gift!”",
+"“Huh. I’ve been meaning to learn how to cook.” Tiffany giggles and flips through the cookbook’s pages. “I guess I gotta start somewhere.”"]},
+{"name" : "outcome-2", "outcomes" :
+["With that, Tiffany slams the door in my face.",
+"Tiffany and I chat for a bit, but we quickly run out of things to say (of course). We awkwardly bid each other farewell and go our separate ways.",
+"Tiffany invites me into her unit and we chat for a while. She seems to be her usual self. Never once did the topic of my sexuality pop up (thank goodness for that). Before I leave, Tiffany tells me that I am welcome back anytime.",
+"Tiffany invites me into her unit and we chat for a while. She seems to be her usual self. Never once did the topic of my sexuality pop up (thank goodness for that). Before I leave, Tiffany tells me that I am welcome back anytime."]}
 ]},
 {"name" : "Bryan", "description" : "a high-school acquaintance (meh)", "gender" : "male", "bio" : "Heh. He and I couldn’t care less about each other. Ever since that one time when I took advantage of him, we’ve become strangers to each other.", "home" : "He lives with his parents in a nice suburban house that has a small pool in the backyard.",
 "script" : [
@@ -23,13 +27,17 @@
 {"name" : "reply", "description" : "“I won a measly fifty bucks.” I shrug. “It’s not as if I cost you your entire future.”"},
 {"name" : "reaction-1", "description" : "Bryan sighs. “Get out of my house.”"},
 {"name" : "reaction-2", "description" : "He tentatively takes it and puts it aside."},
-{"name" : "reaction-3", "description" : "peeks inside it."}
-],
-"outcomes" : [
-{"outcome" : [{"name" : "outcome-1", "description" : "“Oh.” Bryan pulls out the [gift-alias] and sighs. “That’s cute.”"}, {"name" : "outcome-2", "description" : "Bryan and I don’t talk for a good few minutes. I quietly excuse myself. I won’t be coming back here. Maybe ever."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Some [gift-alias], huh?” Bryan eyes it before lifting his head to look at me. “Wanna share?”"}, {"name" : "outcome-2", "description" : "Bryan and I share the [gift-alias] and catch up on old times. I can tell he has opened up to me, but there’s still this tension between us. I leave the house not long after."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“No way!” Bryan pulls out the book and flips it in his hands. “I finally have something to read!” He pauses, a sheepish smile on his face. “Thanks, Amanda.”"}, {"name" : "outcome-2", "description" : "“You do know it’s a [gift-alias], right?” I say. But Bryan isn’t listening. He happily cradles the book in his arm and leaves the dining room."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Just what I needed!” Bryan pulls out the alarm clock and places it on the table. “I’ve been having trouble waking up. My phone’s alarm just won’t do it anymore.” He pauses, a sheepish smile on his face. “Thanks, Amanda.”"}, {"name" : "outcome-2", "description" : "“It’s just an alarm clock,” I say. But Bryan isn’t listening. He happily cradles it in his arm and leaves the dining room."}]}
+{"name" : "reaction-3", "description" : "peeks inside it."},
+{"name" : "outcome-1", "outcomes" :
+["“Oh.” Bryan pulls out the [gift-alias] and sighs. “That’s cute.”",
+"“Some [gift-alias], huh?” Bryan eyes it before lifting his head to look at me. “Wanna share?”",
+"“No way!” Bryan pulls out the book and flips it in his hands. “I finally have something to read!” He pauses, a sheepish smile on his face. “Thanks, Amanda.”",
+"“Just what I needed!” Bryan pulls out the alarm clock and places it on the table. “I’ve been having trouble waking up. My phone’s alarm just won’t do it anymore.” He pauses, a sheepish smile on his face. “Thanks, Amanda.”"]},
+{"name" : "outcome-2", "outcomes" :
+["Bryan and I don’t talk for a good few minutes. I quietly excuse myself. I won’t be coming back here. Maybe ever.",
+"Bryan and I share the [gift-alias] and catch up on old times. I can tell he has opened up to me, but there’s still this tension between us. I leave the house not long after.",
+"“You do know it’s a [gift-alias], right?” I say. But Bryan isn’t listening. He happily cradles the book in his arm and leaves the dining room.",
+"“It’s just an alarm clock,” I say. But Bryan isn’t listening. He happily cradles it in his arm and leaves the dining room."]}
 ]},
 {"name" : "Ellie", "description" : "a former colleague (cool person)", "gender" : "female", "bio" : "Oh, Ellie. She’s the sweetest girl I’ve ever met. I shouldn’t have ever influenced her (I’m such a bad example). I still can’t believe I’ve ruined her life.", "home" : "She lives in a small bungalow under some government housing scheme.",
 "script" : [
@@ -38,13 +46,17 @@
 {"name" : "reply", "description" : "“I suppose,” I say. “Those were fun days, wouldn’t you say?”"},
 {"name" : "reaction-1", "description" : "Ellie stares straight at me. “I don’t need you. I use Tinder now.”"},
 {"name" : "reaction-2", "description" : "She gingerly accepts it and starts towards her house. I step in front of her. Ellie grumbles louder this time."},
-{"name" : "reaction-3", "description" : "takes out my gift."}
-],
-"outcomes" : [
-{"outcome" : [{"name" : "outcome-1", "description" : "“Of course you got me something useless.” Ellie shakes her head. “Well, thanks anyway. Merry Christmas, Amanda.”"}, {"name" : "outcome-2", "description" : "With that, Ellie marches up to her door, swings it open and disappears into the dimly lit hallway."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Oh, you got me a regular old book.” Ellie reads the blurb and cocks her head. “I guess I might enjoy this.”"}, {"name" : "outcome-2", "description" : "Ellie and I chat for a little while. She seems a bit reserved, as if she has finally let her guard down. Soon after, we bid each other goodbye and leave each other alone."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“Some [gift-alias]?” Ellie looks up at me and smiles. “This could go well with the roast chicken I’m preparing. Would you like to join me for dinner?”"}, {"name" : "outcome-2", "description" : "I gladly accept Ellie’s invitation and help her with the dinner preparations. All the while, we talk about everything and everything related to food. I almost forgot how much of a foodie she is. The roast chicken, served with a refreshing Caesar salad, tasted heavenly. After cleaning up, I bid Ellie goodbye with a rather full stomach."}]},
-{"outcome" : [{"name" : "outcome-1", "description" : "“It’s been a while since someone has given me a cookbook.” Ellie smiles sweetly. “Hey, I’m preparing roast chicken. Would you like to join me for dinner?”"}, {"name" : "outcome-2", "description" : "I gladly accept Ellie’s invitation and help her with the dinner preparations. All the while, we talk about everything and everything related to food. I almost forgot how much of a foodie she is. The roast chicken, served with a refreshing Caesar salad, tasted heavenly. After cleaning up, I bid Ellie goodbye with a rather full stomach."}]}
+{"name" : "reaction-3", "description" : "takes out my gift."},
+{"name" : "outcome-1", "outcomes" :
+["“Of course you got me something useless.” Ellie shakes her head. “Well, thanks anyway. Merry Christmas, Amanda.”",
+"“Oh, you got me a regular old book.” Ellie reads the blurb and cocks her head. “I guess I might enjoy this.”",
+"“Some [gift-alias]?” Ellie looks up at me and smiles. “This could go well with the roast chicken I’m preparing. Would you like to join me for dinner?”",
+"“It’s been a while since someone has given me a cookbook.” Ellie smiles sweetly. “Hey, I’m preparing roast chicken. Would you like to join me for dinner?”"]},
+{"name" : "outcome-2", "outcomes" :
+["With that, Ellie marches up to her door, swings it open and disappears into the dimly lit hallway.",
+"Ellie and I chat for a little while. She seems a bit reserved, as if she has finally let her guard down. Soon after, we bid each other goodbye and leave each other alone.",
+"I gladly accept Ellie’s invitation and help her with the dinner preparations. All the while, we talk about everything and everything related to food. I almost forgot how much of a foodie she is. The roast chicken, served with a refreshing Caesar salad, tasted heavenly. After cleaning up, I bid Ellie goodbye with a rather full stomach.",
+"I gladly accept Ellie’s invitation and help her with the dinner preparations. All the while, we talk about everything and everything related to food. I almost forgot how much of a foodie she is. The roast chicken, served with a refreshing Caesar salad, tasted heavenly. After cleaning up, I bid Ellie goodbye with a rather full stomach."]}
 ]}
 ],
 "locations" :
