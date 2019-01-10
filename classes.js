@@ -45,19 +45,10 @@ class Choice extends StoryText {
 	constructor(name, description, options) {
 		super(name, description);
 		this._options = options;
-		this._complete = false;
 	}
 	
 	getOptions() {
 		return this._options;
-	}
-	
-	setComplete() {
-		this._complete = true;
-	}
-	
-	isComplete() {
-		return this._complete;
 	}
 }
 
