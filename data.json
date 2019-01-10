@@ -75,7 +75,7 @@
 {"name" : "a dog plushie", "description" : "Nice and fluffy. I kinda want it for myself.", "alias" : "dog plushie"},
 {"name" : "an alarm clock", "description" : "It’s a typical alarm clock but with a cartoon face.", "alias" : "alarm clock"}
 ]},
-{"name" : "bakery", "description" : "filled with the smell of pastries and coffee. Oddly enough, the bakery sells wine and beer as well.", "browse" : "consider the assortment of food and drinks", "gift_type" : "food and drinks", "gifts" :
+{"name" : "bakery", "description" : "filled with the smell of pastries and coffee. Oddly enough, the bakery sells wine and beer as well.", "browse" : "consider the wonderful selection", "gift_type" : "food and drinks", "gifts" :
 [
 {"name" : "wine", "description" : "I’m not a wine person, but I don’t think you can go wrong it.",  "alias" : "wine"},
 {"name" : "freshly-baked bread", "description" : "It smells delightful. I feel hungry already.", "alias" : "bread"},

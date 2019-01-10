@@ -128,7 +128,7 @@ function run() {
 		scroll = false;
 	}
 	
-	if (script.length > 0) {
+	if (script.length > 0) { // Display choice
 		updateStoryText(script[script.length-1]);
 		appendChoice(script.pop());
 	} else
@@ -231,16 +231,17 @@ function showOutcome(choice, result) {
 		link.removeAttribute("class");
 		link.removeAttribute("onclick");
 		
-		// Highlight selected option
-		if (i == selected)
-			link.setAttribute("style", "font-weight:bold; color:blue");
+		if (i == selected) {
+			link.setAttribute("style", "font-weight:bold; color:blue"); // Highlight selected option
+			updateWordCount(link);                                      // Include selected option in word count
+		}
 	}
 	
 	run();
 }
 
-function updateWordCount(paragraph) {
-	word_count += paragraph.innerHTML.split(' ').length;
+function updateWordCount(element) {
+	word_count += element.innerHTML.split(' ').length;
 }
 
 function displayFinalWordCount() {
